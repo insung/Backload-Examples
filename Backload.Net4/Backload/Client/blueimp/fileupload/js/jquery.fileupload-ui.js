@@ -411,10 +411,10 @@
               return false;
             }
 
-            // flag for same file exists
-            var isExists = false;
-
             $.each(data.files, function (index, file) {
+              // flag for same file exists
+              var isExists = false;
+
               $.each(uploadedFiles, function (idx, f) {
                 // check same file
                 if (f.name === file.name && f.type === file.type && f.size === file.size) {
@@ -431,10 +431,6 @@
                 totalFileSize += item.size;
               }
             });
-
-            // don't update ui
-            if (isExists)
-              return false;
 
             // dropzone hide
             $("#dropzone").hide();

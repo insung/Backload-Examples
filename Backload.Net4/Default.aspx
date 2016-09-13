@@ -63,6 +63,8 @@
   </style>
 
   <script type="text/javascript">
+    var uploadedFiles = [{ name: null, type: null, size: 0 }];
+
     $(document).ready(function () {
 
       // get guid (see http://stackoverflow.com/a/2117523/1201067)
@@ -73,6 +75,42 @@
 
       $("#uploadContext").val(guid);
     });
+
+    // check same file and remove from ui
+    function checkUploadedFile(file) {
+      var result = false;
+      $.each(uploadedFiles, function (idx, f) {
+        if (f.name === file.name && f.type == file.type && f.size === file.size) {
+          result = true;
+          // break;
+          return false;
+        }
+      });
+
+      if (!result) {
+        var item = { name: file.name, type: file.type, size: file.size };
+        uploadedFiles.push(item);
+      }
+
+      return result;
+    }
+
+    // remove ui when cancel button click
+    function removeUploadedFile(data) {
+      // data is 'name|type|size' format
+      var arr = data.split('|');
+      var item = { name: arr[0], type: arr[1], size: parseInt(arr[2]) };
+      var index = 0;
+
+      // get delete uploadedFiles index
+      $.each(uploadedFiles, function (idx, f) {
+        if (f.name === item.name && f.type === item.type && f.size === item.size)
+          index = idx;
+      });
+
+      // delete
+      uploadedFiles.splice(index, 1);
+    }
   </script>
 </head>
 <body>
@@ -168,6 +206,7 @@
   <!-- The template to display files available for upload -->
   <script id="template-upload" type="text/x-tmpl">
             {% for (var i=0, file; file=o.files[i]; i++) { %}
+            {% if (checkUploadedFile(file)) continue; %}
             <tr class="template-upload fade">
                 <td>
                     <p class="name">{%=file.name%}</p>
@@ -185,7 +224,7 @@
                     </button>
                     {% } %}
                     {% if (!i) { %}
-                    <button class="btn btn-warning cancel">
+                    <button class="btn btn-warning cancel" value="{%= file.name + '|' + file.type + '|' + file.size %}" onclick="removeUploadedFile($(this).val());">
                         <i class="glyphicon glyphicon-ban-circle"></i>
                         <span>Cancel</span>
                     </button>
