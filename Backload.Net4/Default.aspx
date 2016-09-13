@@ -54,7 +54,11 @@
 
     .dragndrop {
       text-align: center;
-      line-height: 17em;
+      line-height: 22em;
+    }
+
+    .name {
+      width: 100% !important;
     }
   </style>
 
@@ -102,7 +106,7 @@
     </div>
 
     <%--dropzone--%>
-    <div id="dropzone" class="panel panel-default dragndrop" style="height: 400px; margin-top: 40px;">
+    <div id="dropzone" class="panel panel-default dragndrop" style="height: 400px; margin-top: 50px;">
       <div class="panel-body">
         <span>Drag & Drop files here!</span>
       </div>
@@ -153,9 +157,6 @@
             {% for (var i=0, file; file=o.files[i]; i++) { %}
             <tr class="template-upload fade">
                 <td>
-                    <span class="preview"></span>
-                </td>
-                <td>
                     <p class="name">{%=file.name%}</p>
                     <strong class="error text-danger"></strong>
                 </td>
@@ -186,19 +187,8 @@
             {% for (var i=0, file; file=o.files[i]; i++) { %}
             <tr class="template-download fade">
                 <td>
-                    <span class="preview">
-                        {% if (file.thumbnailUrl) { %}
-                        <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
-                        {% } %}
-                    </span>
-                </td>
-                <td>
                     <p class="name">
-                        {% if (file.url) { %}
-                        <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
-                        {% } else { %}
                         <span>{%=file.name%}</span>
-                        {% } %}
                     </p>
                     {% if (file.error) { %}
                     <div><span class="label label-danger">Error</span> {%=file.error%}</div>
