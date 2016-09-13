@@ -35,18 +35,26 @@
   <link href="Backload/Client/blueimp/fileupload/css/jquery.fileupload.css" rel="stylesheet" />
   <link href="Backload/Client/blueimp/fileupload/css/jquery.fileupload-ui.css" rel="stylesheet" />
 
+  <%--my fileupload handler javascript--%>
+  <script src="Scripts/fileuploadhandler.js"></script>
+
   <style type="text/css">
     body {
       padding: 12px;
+    }
+
+    .navbar {
+      padding-top: 8px;
+      padding-left: 10px;
     }
   </style>
 </head>
 <body>
   <!-- The file upload form used as target for the file upload widget -->
-  <form id="fileupload" action="/Backload/FileHandler" method="POST" enctype="multipart/form-data">
-    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-    <div class="row fileupload-buttonbar">
-      <div class="col-lg-7">
+  <form id="fileupload" action="FileUploadHandler.ashx" method="POST" enctype="multipart/form-data">
+    <div class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 5px;">
+      <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+      <div class="fileupload-buttonbar">
         <!-- The fileinput-button span is used to style the file input field as button -->
         <span class="btn btn-success fileinput-button">
           <i class="glyphicon glyphicon-plus"></i>
@@ -69,8 +77,11 @@
         <!-- The global file processing state -->
         <span class="fileupload-process"></span>
       </div>
+    </div>
+
+    <div class="container">
       <!-- The global progress state -->
-      <div class="col-lg-5 fileupload-progress fade">
+      <div class="fileupload-progress fade">
         <!-- The global progress bar -->
         <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
           <div class="progress-bar progress-bar-success" style="width: 0%;"></div>
@@ -79,26 +90,24 @@
         <div class="progress-extended">&nbsp;</div>
       </div>
     </div>
-    <!-- The table listing the files available for upload/download -->
-    <table role="presentation" class="table table-striped">
-      <tbody class="files"></tbody>
-    </table>
+
+    <div class="container">
+      <!-- The table listing the files available for upload/download -->
+      <table role="presentation" class="table table-striped">
+        <tbody class="files"></tbody>
+      </table>
+    </div>
   </form>
 
-  <div class="container">
-    <div class="container">
-    </div>
-    <!-- The blueimp Gallery widget -->
-    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
-      <div class="slides"></div>
-      <h3 class="title"></h3>
-      <a class="prev">‹</a>
-      <a class="next">›</a>
-      <a class="close">×</a>
-      <a class="play-pause"></a>
-      <ol class="indicator"></ol>
-    </div>
-    <br />
+  <!-- The blueimp Gallery widget -->
+  <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
   </div>
 
   <!-- The template to display files available for upload -->
