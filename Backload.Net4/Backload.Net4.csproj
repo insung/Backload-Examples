@@ -356,6 +356,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backload\Helper\ResultCreator.Classic.cs" />
+    <Compile Include="FileUploadHandler.ashx.cs">
+      <DependentUpon>FileUploadHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -371,6 +374,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Backload\Web.Backload.config" />
+    <Content Include="FileUploadHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
