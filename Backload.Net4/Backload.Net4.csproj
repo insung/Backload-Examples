@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,7 +39,52 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Backload, Version=2.2.2.5, Culture=neutral, PublicKeyToken=02eaf42ab375d363, processorArchitecture=MSIL">
+      <HintPath>..\packages\Backload.Core.2.2.2.5\lib\net40\Backload.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Backload.Contracts, Version=2.2.2.5, Culture=neutral, PublicKeyToken=079b4834180abdf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Backload.Core.2.2.2.5\lib\net40\Backload.Contracts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -48,6 +94,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -55,20 +105,286 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Backload\Client\blueimp\blob\js\canvas-to-blob.js" />
+    <Content Include="Backload\Client\blueimp\blob\js\canvas-to-blob.min.js" />
+    <Content Include="Backload\Client\blueimp\bundles\css\bundles.txt" />
+    <Content Include="Backload\Client\blueimp\bundles\css\debug\jquery.fileupload.bundle.css" />
+    <Content Include="Backload\Client\blueimp\bundles\css\jquery.fileupload.bundle.min.css" />
+    <Content Include="Backload\Client\blueimp\bundles\img\loading.gif" />
+    <Content Include="Backload\Client\blueimp\bundles\img\progressbar.gif" />
+    <Content Include="Backload\Client\blueimp\bundles\js\bundles.txt" />
+    <Content Include="Backload\Client\blueimp\bundles\js\debug\jquery.fileupload.angularjs.js" />
+    <Content Include="Backload\Client\blueimp\bundles\js\debug\jquery.fileupload.basic.js" />
+    <Content Include="Backload\Client\blueimp\bundles\js\debug\jquery.fileupload.basicplus.js" />
+    <Content Include="Backload\Client\blueimp\bundles\js\debug\jquery.fileupload.basicplusui.js" />
+    <Content Include="Backload\Client\blueimp\bundles\js\debug\jquery.fileupload.jqueryui.js" />
+    <Content Include="Backload\Client\blueimp\bundles\js\jquery.fileupload.angularjs.min.js" />
+    <Content Include="Backload\Client\blueimp\bundles\js\jquery.fileupload.basic.min.js" />
+    <Content Include="Backload\Client\blueimp\bundles\js\jquery.fileupload.basicplus.min.js" />
+    <Content Include="Backload\Client\blueimp\bundles\js\jquery.fileupload.basicplusui.min.js" />
+    <Content Include="Backload\Client\blueimp\bundles\js\jquery.fileupload.jqueryui.min.js" />
+    <Content Include="Backload\Client\blueimp\bundles\readme.txt" />
+    <Content Include="Backload\Client\blueimp\fileupload\cors\postmessage.html" />
+    <Content Include="Backload\Client\blueimp\fileupload\cors\result.html" />
+    <Content Include="Backload\Client\blueimp\fileupload\css\jquery.fileupload-noscript.css" />
+    <Content Include="Backload\Client\blueimp\fileupload\css\jquery.fileupload-ui-noscript.css" />
+    <Content Include="Backload\Client\blueimp\fileupload\css\jquery.fileupload-ui.css" />
+    <Content Include="Backload\Client\blueimp\fileupload\css\jquery.fileupload.css" />
+    <Content Include="Backload\Client\blueimp\fileupload\img\loading.gif" />
+    <Content Include="Backload\Client\blueimp\fileupload\img\progressbar.gif" />
+    <Content Include="Backload\Client\blueimp\fileupload\js\cors\jquery.postmessage-transport.js" />
+    <Content Include="Backload\Client\blueimp\fileupload\js\cors\jquery.xdr-transport.js" />
+    <Content Include="Backload\Client\blueimp\fileupload\js\jquery.fileupload-angular.js" />
+    <Content Include="Backload\Client\blueimp\fileupload\js\jquery.fileupload-audio.js" />
+    <Content Include="Backload\Client\blueimp\fileupload\js\jquery.fileupload-image.js" />
+    <Content Include="Backload\Client\blueimp\fileupload\js\jquery.fileupload-jquery-ui.js" />
+    <Content Include="Backload\Client\blueimp\fileupload\js\jquery.fileupload-process.js" />
+    <Content Include="Backload\Client\blueimp\fileupload\js\jquery.fileupload-ui.js" />
+    <Content Include="Backload\Client\blueimp\fileupload\js\jquery.fileupload-validate.js" />
+    <Content Include="Backload\Client\blueimp\fileupload\js\jquery.fileupload-video.js" />
+    <Content Include="Backload\Client\blueimp\fileupload\js\jquery.fileupload.js" />
+    <Content Include="Backload\Client\blueimp\fileupload\js\jquery.iframe-transport.js" />
+    <Content Include="Backload\Client\blueimp\fileupload\js\themes\jquery.fileupload-themes.js" />
+    <Content Include="Backload\Client\blueimp\fileupload\js\vendor\jquery.ui.widget.js" />
+    <Content Include="Backload\Client\blueimp\gallery\css\blueimp-gallery-indicator.css" />
+    <Content Include="Backload\Client\blueimp\gallery\css\blueimp-gallery-video.css" />
+    <Content Include="Backload\Client\blueimp\gallery\css\blueimp-gallery.css" />
+    <Content Include="Backload\Client\blueimp\gallery\css\blueimp-gallery.min.css" />
+    <Content Include="Backload\Client\blueimp\gallery\img\error.png" />
+    <Content Include="Backload\Client\blueimp\gallery\img\error.svg" />
+    <Content Include="Backload\Client\blueimp\gallery\img\loading.gif" />
+    <Content Include="Backload\Client\blueimp\gallery\img\play-pause.png" />
+    <Content Include="Backload\Client\blueimp\gallery\img\play-pause.svg" />
+    <Content Include="Backload\Client\blueimp\gallery\img\video-play.png" />
+    <Content Include="Backload\Client\blueimp\gallery\img\video-play.svg" />
+    <Content Include="Backload\Client\blueimp\gallery\js\blueimp-gallery-fullscreen.js" />
+    <Content Include="Backload\Client\blueimp\gallery\js\blueimp-gallery-indicator.js" />
+    <Content Include="Backload\Client\blueimp\gallery\js\blueimp-gallery-video.js" />
+    <Content Include="Backload\Client\blueimp\gallery\js\blueimp-gallery-vimeo.js" />
+    <Content Include="Backload\Client\blueimp\gallery\js\blueimp-gallery-youtube.js" />
+    <Content Include="Backload\Client\blueimp\gallery\js\blueimp-gallery.js" />
+    <Content Include="Backload\Client\blueimp\gallery\js\blueimp-gallery.min.js" />
+    <Content Include="Backload\Client\blueimp\gallery\js\blueimp-helper.js" />
+    <Content Include="Backload\Client\blueimp\gallery\js\jquery.blueimp-gallery.js" />
+    <Content Include="Backload\Client\blueimp\gallery\js\jquery.blueimp-gallery.min.js" />
+    <Content Include="Backload\Client\blueimp\loadimage\css\vendor\Jcrop.gif" />
+    <Content Include="Backload\Client\blueimp\loadimage\css\vendor\jquery.Jcrop.css" />
+    <Content Include="Backload\Client\blueimp\loadimage\js\load-image-exif-map.js" />
+    <Content Include="Backload\Client\blueimp\loadimage\js\load-image-exif.js" />
+    <Content Include="Backload\Client\blueimp\loadimage\js\load-image-ios.js" />
+    <Content Include="Backload\Client\blueimp\loadimage\js\load-image-meta.js" />
+    <Content Include="Backload\Client\blueimp\loadimage\js\load-image-orientation.js" />
+    <Content Include="Backload\Client\blueimp\loadimage\js\load-image.all.min.js" />
+    <Content Include="Backload\Client\blueimp\loadimage\js\load-image.js" />
+    <Content Include="Backload\Client\blueimp\loadimage\js\vendor\jquery.Jcrop.js" />
+    <Content Include="Backload\Client\blueimp\templates\js\tmpl.js" />
+    <Content Include="Backload\Client\blueimp\templates\js\tmpl.min.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ar.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\az.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\bg.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\bs.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ca.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\cs.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\cy.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\da.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\de.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\el.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\en.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\es.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\et.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\fa.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\fi.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\fr.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\he.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\hr.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\hu.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\hy.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\id.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\it.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ja.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ka.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\kk.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\km.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ko.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ku_IQ.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\lt.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\lv.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\mn.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ms.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\nl.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\pl.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\pt_BR.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ro.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\ru.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\sk.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\sq.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\sr.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\sr_RS.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\sv.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\th_TH.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\tr.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\uk_UA.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\vi.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\zh_CN.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\i18n\zh_TW.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\css\jquery.plupload.queue.css" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\backgrounds.gif" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\buttons-disabled.png" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\buttons.png" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\delete.gif" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\done.gif" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\error.gif" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\throbber.gif" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\img\transp50.png" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\jquery.plupload.queue.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.plupload.queue\jquery.plupload.queue.min.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.ui.plupload\css\jquery.ui.plupload.css" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.ui.plupload\img\loading.gif" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.ui.plupload\img\plupload.png" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.ui.plupload\jquery.ui.plupload.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\jquery.ui.plupload\jquery.ui.plupload.min.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\moxie.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\moxie.min.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\Moxie.swf" />
+    <Content Include="Backload\Client\moxie\plupload\js\Moxie.xap" />
+    <Content Include="Backload\Client\moxie\plupload\js\plupload.dev.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\plupload.full.min.js" />
+    <Content Include="Backload\Client\moxie\plupload\js\plupload.min.js" />
+    <Content Include="Backload\Client\widen\fineuploader\continue.gif" />
+    <Content Include="Backload\Client\widen\fineuploader\edit.gif" />
+    <Content Include="Backload\Client\widen\fineuploader\fine-uploader-gallery.min.css" />
+    <Content Include="Backload\Client\widen\fineuploader\fine-uploader-new.min.css" />
+    <Content Include="Backload\Client\widen\fineuploader\js\fine-uploader.min.js" />
+    <Content Include="Backload\Client\widen\fineuploader\loading.gif" />
+    <Content Include="Backload\Client\widen\fineuploader\pause.gif" />
+    <Content Include="Backload\Client\widen\fineuploader\placeholders\not_available-generic.png" />
+    <Content Include="Backload\Client\widen\fineuploader\placeholders\waiting-generic.png" />
+    <Content Include="Backload\Client\widen\fineuploader\processing.gif" />
+    <Content Include="Backload\Client\widen\fineuploader\retry.gif" />
+    <Content Include="Backload\Client\widen\fineuploader\templates\fine-uploader-gallery.template.js" />
+    <Content Include="Backload\Client\widen\fineuploader\trash.gif" />
+    <Content Include="Backload\Config\_Defaults\Defaults.txt" />
+    <Content Include="Backload\ContentTypes\128\Excel.png" />
+    <Content Include="Backload\ContentTypes\128\File.png" />
+    <Content Include="Backload\ContentTypes\128\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\128\Image.png" />
+    <Content Include="Backload\ContentTypes\128\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\128\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\128\PDF.png" />
+    <Content Include="Backload\ContentTypes\128\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\128\Text.png" />
+    <Content Include="Backload\ContentTypes\128\Word.png" />
+    <Content Include="Backload\ContentTypes\16\Excel.png" />
+    <Content Include="Backload\ContentTypes\16\File.png" />
+    <Content Include="Backload\ContentTypes\16\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\16\Image.png" />
+    <Content Include="Backload\ContentTypes\16\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\16\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\16\PDF.png" />
+    <Content Include="Backload\ContentTypes\16\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\16\Text.png" />
+    <Content Include="Backload\ContentTypes\16\Word.png" />
+    <Content Include="Backload\ContentTypes\24\Excel.png" />
+    <Content Include="Backload\ContentTypes\24\File.png" />
+    <Content Include="Backload\ContentTypes\24\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\24\Image.png" />
+    <Content Include="Backload\ContentTypes\24\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\24\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\24\PDF.png" />
+    <Content Include="Backload\ContentTypes\24\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\24\Text.png" />
+    <Content Include="Backload\ContentTypes\24\Word.png" />
+    <Content Include="Backload\ContentTypes\32\Excel.png" />
+    <Content Include="Backload\ContentTypes\32\File.png" />
+    <Content Include="Backload\ContentTypes\32\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\32\Image.png" />
+    <Content Include="Backload\ContentTypes\32\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\32\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\32\PDF.png" />
+    <Content Include="Backload\ContentTypes\32\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\32\Text.png" />
+    <Content Include="Backload\ContentTypes\32\Word.png" />
+    <Content Include="Backload\ContentTypes\48\Excel.png" />
+    <Content Include="Backload\ContentTypes\48\File.png" />
+    <Content Include="Backload\ContentTypes\48\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\48\Image.png" />
+    <Content Include="Backload\ContentTypes\48\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\48\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\48\PDF.png" />
+    <Content Include="Backload\ContentTypes\48\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\48\Text.png" />
+    <Content Include="Backload\ContentTypes\48\Word.png" />
+    <Content Include="Backload\ContentTypes\64\Excel.png" />
+    <Content Include="Backload\ContentTypes\64\File.png" />
+    <Content Include="Backload\ContentTypes\64\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\64\Image.png" />
+    <Content Include="Backload\ContentTypes\64\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\64\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\64\PDF.png" />
+    <Content Include="Backload\ContentTypes\64\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\64\Text.png" />
+    <Content Include="Backload\ContentTypes\64\Word.png" />
+    <Content Include="Backload\ContentTypes\72\Excel.png" />
+    <Content Include="Backload\ContentTypes\72\File.png" />
+    <Content Include="Backload\ContentTypes\72\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\72\Image.png" />
+    <Content Include="Backload\ContentTypes\72\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\72\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\72\PDF.png" />
+    <Content Include="Backload\ContentTypes\72\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\72\Text.png" />
+    <Content Include="Backload\ContentTypes\72\Word.png" />
+    <Content Include="Backload\ContentTypes\96\Excel.png" />
+    <Content Include="Backload\ContentTypes\96\File.png" />
+    <Content Include="Backload\ContentTypes\96\FileNotFound.png" />
+    <Content Include="Backload\ContentTypes\96\Image.png" />
+    <Content Include="Backload\ContentTypes\96\Multimedia.png" />
+    <Content Include="Backload\ContentTypes\96\OpenOffice-Writer.png" />
+    <Content Include="Backload\ContentTypes\96\PDF.png" />
+    <Content Include="Backload\ContentTypes\96\PowerPoint.png" />
+    <Content Include="Backload\ContentTypes\96\Text.png" />
+    <Content Include="Backload\ContentTypes\96\Word.png" />
+    <Content Include="Backload\Imaging\readme.txt" />
+    <Content Include="Backload\License.txt" />
+    <Content Include="Backload\Release.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backload\Bundles\BackloadBundles.cs" />
+    <Compile Include="Backload\Controller\BackloadController.cs" />
+    <Compile Include="Backload\Controller\BackloadController.obsolete.cs" />
+    <Compile Include="Backload\Helper\ResultCreator.Classic.cs" />
+    <Compile Include="Backload\Helper\ResultCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="Backload\Logs\log.folder" />
+    <Content Include="Backload\Client\blueimp\templates\package.json" />
+    <Content Include="Backload\Client\blueimp\loadimage\package.json" />
+    <Content Include="Backload\Client\blueimp\gallery\package.json" />
+    <Content Include="Backload\Client\blueimp\gallery\css\blueimp-gallery.less" />
+    <Content Include="Backload\Client\blueimp\fileupload\package.json" />
+    <Content Include="Backload\Client\blueimp\blob\package.json" />
+    <None Include="Backload\Config\Web.Backload.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Backload\Web.Backload.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Start\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -95,6 +411,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
