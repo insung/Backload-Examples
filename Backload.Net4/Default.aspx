@@ -51,10 +51,23 @@
     .toggle {
       display: inline-block !important;
     }
+
+    .dragndrop {
+      text-align: center;
+      line-height: 17em;
+    }
   </style>
 
   <script type="text/javascript">
     $(document).ready(function () {
+
+      // get guid (see http://stackoverflow.com/a/2117523/1201067)
+      var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+
+      $("#uploadContext").val(guid);
     });
   </script>
 </head>
