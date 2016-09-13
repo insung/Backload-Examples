@@ -107,13 +107,14 @@
           <%--Files count & size--%>
           Now:&nbsp;
           <span id="file-count">0</span>
+          EA&nbsp;/
           <span id="file-size">0 KB</span>
 
           <%--Max files count & size--%>
           &nbsp;&nbsp;&nbsp;
           MAX:&nbsp;
           <span id="file-max-count">10</span>
-          EA
+          EA&nbsp;/
           <span id="file-max-size">10</span>
           MB
         </p>
