@@ -1,3 +1,4 @@
 *.suo
 *.user
-Backload.Net4/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+Backload.Net4/obj/*
+Backload.Net4/bin/*

@@ -356,11 +356,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Backload\Bundles\BackloadBundles.cs" />
-    <Compile Include="Backload\Controller\BackloadController.cs" />
-    <Compile Include="Backload\Controller\BackloadController.obsolete.cs" />
     <Compile Include="Backload\Helper\ResultCreator.Classic.cs" />
-    <Compile Include="Backload\Helper\ResultCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
