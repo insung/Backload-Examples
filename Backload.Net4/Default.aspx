@@ -122,7 +122,7 @@
     </div>
 
     <%--dropzone--%>
-    <div id="dropzone" class="panel panel-default dragndrop" style="height: 400px; margin-top: 50px;">
+    <div id="dropzone" class="panel panel-default dragndrop" style="height: 400px; margin-top: 80px;">
       <div class="panel-body">
         <span>Drag & Drop files here!</span>
       </div>

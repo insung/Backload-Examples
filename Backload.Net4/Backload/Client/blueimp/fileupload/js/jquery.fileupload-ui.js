@@ -599,6 +599,40 @@
                 data = template.data('data') || {};
             data.context = data.context || template;
             if (data.abort) {
+
+              // current item
+              var abortedFile = { name: data.files[0].name, type: data.files[0].type, size: data.files[0].size };
+              var index = 0;
+
+              // get delete uploadedFiles index
+              $.each(uploadedFiles, function (idx, f) {
+                if (f.name === abortedFile.name && f.type === abortedFile.type && f.size === abortedFile.size) {
+                  index = idx;
+                  totalFileSize -= abortedFile.size;
+                }
+              });
+
+              // delete
+              uploadedFiles.splice(index, 1);
+
+              // dropzone fade in when count == 1
+              // uploadedFiles.length == 1 is default. see uploadedFiles initialize.
+              if (uploadedFiles.length == 1)
+                $("#dropzone").fadeIn();
+
+              // update file count
+              $("#file-count").text(uploadedFiles.length - 1);
+
+              // update file size
+              if (totalFileSize >= 1000000000) {
+                $("#file-size").text((totalFileSize / 1000000000).toFixed(2) + ' GB');
+              }
+              else if (totalFileSize >= 1000000) {
+                $("#file-size").text((totalFileSize / 1000000).toFixed(2) + ' MB');
+              } else {
+                $("#file-size").text((totalFileSize / 1000).toFixed(2) + ' KB');
+              }
+
                 data.abort();
             } else {
                 data.errorThrown = 'abort';
