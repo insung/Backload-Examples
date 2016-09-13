@@ -47,7 +47,16 @@
       padding-top: 8px;
       padding-left: 10px;
     }
+
+    .toggle {
+      display: inline-block !important;
+    }
   </style>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+    });
+  </script>
 </head>
 <body>
   <!-- The file upload form used as target for the file upload widget -->
@@ -79,24 +88,40 @@
       </div>
     </div>
 
-    <div class="container">
-      <!-- The global progress state -->
-      <div class="fileupload-progress fade">
-        <!-- The global progress bar -->
-        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-          <div class="progress-bar progress-bar-success" style="width: 0%;"></div>
-        </div>
-        <!-- The extended global progress state -->
-        <div class="progress-extended">&nbsp;</div>
+    <%--dropzone--%>
+    <div id="dropzone" class="panel panel-default dragndrop" style="height: 400px; margin-top: 40px;">
+      <div class="panel-body">
+        <span>Drag & Drop files here!</span>
       </div>
     </div>
 
-    <div class="container">
-      <!-- The table listing the files available for upload/download -->
-      <table role="presentation" class="table table-striped">
-        <tbody class="files"></tbody>
-      </table>
+    <div class="container-fluid">
+      <div class="row">
+        <!-- The global progress state -->
+        <div class="fileupload-progress fade">
+          <!-- The global progress bar -->
+          <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar progress-bar-success" style="width: 0%;"></div>
+          </div>
+          <!-- The extended global progress state -->
+          <div class="progress-extended">&nbsp;</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- The table listing the files available for upload/download -->
+        <table role="presentation" class="table table-striped">
+          <tbody class="files"></tbody>
+        </table>
+      </div>
     </div>
+
+    <%--object context & upload context--%>
+    <input id="objectContext" type="hidden" name="objectContext" value="Uploads" />
+    <input id="uploadContext" type="hidden" name="uploadContext" value="" />
+
+    <input id="maxFileCount" runat="server" type="hidden" />
+    <input id="maxFileSize" runat="server" type="hidden" />
   </form>
 
   <!-- The blueimp Gallery widget -->
