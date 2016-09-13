@@ -102,6 +102,21 @@
         <input type="checkbox" class="toggle">
         <!-- The global file processing state -->
         <span class="fileupload-process"></span>
+
+        <p id="filecountgroup">
+          <%--Files count & size--%>
+          Now:&nbsp;
+          <span id="file-count">0</span>
+          <span id="file-size">0 KB</span>
+
+          <%--Max files count & size--%>
+          &nbsp;&nbsp;&nbsp;
+          MAX:&nbsp;
+          <span id="file-max-count">10</span>
+          EA
+          <span id="file-max-size">10</span>
+          MB
+        </p>
       </div>
     </div>
 
@@ -136,9 +151,6 @@
     <%--object context & upload context--%>
     <input id="objectContext" type="hidden" name="objectContext" value="Uploads" />
     <input id="uploadContext" type="hidden" name="uploadContext" value="" />
-
-    <input id="maxFileCount" runat="server" type="hidden" />
-    <input id="maxFileSize" runat="server" type="hidden" />
   </form>
 
   <!-- The blueimp Gallery widget -->

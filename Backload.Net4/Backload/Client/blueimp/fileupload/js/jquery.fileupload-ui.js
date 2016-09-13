@@ -386,6 +386,14 @@
                 } else {
                     removeNode();
                 }
+            },
+          drop: function (e, data) {
+              // dropzone hide
+              $("#dropzone").hide();
+            },
+          change: function (e, data) {
+              // dropzone hide
+              $("#dropzone").hide();
             }
         },
 
