@@ -449,9 +449,63 @@
             }
           },
           change: function (e, data) {
-              // dropzone hide
-              $("#dropzone").hide();
+            var maxFileSize = $("#file-max-size").text() * (1024 * 1024); // MB
+            var maxFileCount = $("#file-max-count").text();
+
+            // check max file count
+            if (maxFileCount < (data.files.length) + (uploadedFiles.length - 1)) {
+              alert('you cannot add file anymore. max upload file count: ' + maxFileCount);
+              return false;
             }
+
+            // check max file size
+            var tempFileSize = 0;
+            $.each(data.files, function (index, file) {
+              tempFileSize += file.size;
+            });
+
+            if (maxFileSize < tempFileSize) {
+              alert('you cannot add file anymore. max upload file size: ' + (maxFileSize / (1024 * 1024)) + 'MB');
+              return false;
+            }
+
+            $.each(data.files, function (index, file) {
+              // flag for same file exists
+              var isExists = false;
+
+              $.each(uploadedFiles, function (idx, f) {
+                // check same file
+                if (f.name === file.name && f.type === file.type && f.size === file.size) {
+                  alert('already exists file: ' + file.name);
+                  isExists = true;
+                  // break;
+                  return false;
+                }
+              });
+
+              if (!isExists) {
+                var item = { name: file.name, type: file.type, size: file.size };
+                uploadedFiles.push(item);
+                totalFileSize += item.size;
+              }
+            });
+
+            // dropzone hide
+            $("#dropzone").hide();
+
+            // update file count
+            $("#file-count").text(uploadedFiles.length - 1);
+
+            // update file size
+            if (totalFileSize >= 1000000000) {
+              $("#file-size").text((totalFileSize / 1000000000).toFixed(2) + ' GB');
+            }
+            else if (totalFileSize >= 1000000) {
+              $("#file-size").text((totalFileSize / 1000000).toFixed(2) + ' MB');
+            } else {
+              $("#file-size").text((totalFileSize / 1000).toFixed(2) + ' KB');
+            }
+          }
         },
 
         _resetFinishedDeferreds: function () {
