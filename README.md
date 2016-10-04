@@ -7,7 +7,7 @@ Backload for .Net Framework 4 + Webform
 3. remove bundles
 4. allow delete method
 5. prevent thumbnail
-6. max file size, max file count, max file name
+6. max file size, max file count, max file name length
 7. check totally same file
 8. allow same file name (rename guid)
 9. add custom store event for test
