@@ -79,6 +79,11 @@
     // check same file and remove from ui
     function checkUploadedFile(file) {
       var result = false;
+
+      if (file.name.length > 104) {
+        return true;
+      }
+
       $.each(uploadedFiles, function (idx, f) {
         if (f.name === file.name && f.type == file.type && f.size === file.size) {
           result = true;

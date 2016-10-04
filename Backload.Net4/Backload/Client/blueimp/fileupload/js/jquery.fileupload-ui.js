@@ -414,6 +414,12 @@
             $.each(data.files, function (index, file) {
               // flag for same file exists
               var isExists = false;
+              var isMaxName = false;
+
+              if (file.name.length > 104) {
+                alert('you cannot add long file name: ' + file.name);
+                isMaxName = true;
+              }
 
               $.each(uploadedFiles, function (idx, f) {
                 // check same file
@@ -425,7 +431,7 @@
                 }
               });
 
-              if (!isExists) {
+              if (!isExists && !isMaxName) {
                 var item = { name: file.name, type: file.type, size: file.size };
                 uploadedFiles.push(item);
                 totalFileSize += item.size;
@@ -472,6 +478,12 @@
             $.each(data.files, function (index, file) {
               // flag for same file exists
               var isExists = false;
+              var isMaxName = false;
+
+              if (file.name.length > 104) {
+                alert('you cannot add long file name: ' + file.name);
+                isMaxName = true;
+              }
 
               $.each(uploadedFiles, function (idx, f) {
                 // check same file
@@ -483,7 +495,7 @@
                 }
               });
 
-              if (!isExists) {
+              if (!isExists && !isMaxName) {
                 var item = { name: file.name, type: file.type, size: file.size };
                 uploadedFiles.push(item);
                 totalFileSize += item.size;
