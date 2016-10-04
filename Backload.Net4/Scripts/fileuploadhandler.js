@@ -15,7 +15,7 @@ $(function () {
   'use strict';
 
   // In this example we use a custom controller
-  var url = '/FileUploadHandler.ashx';
+  var url = '/FileUploadHandler.ashx?objectContext=Uploads';
 
   // Initialize the jQuery File Upload widget:
   $('#fileupload').fileupload({

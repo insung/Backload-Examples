@@ -111,11 +111,18 @@
       // delete
       uploadedFiles.splice(index, 1);
     }
+
+    // rename file from {guid}_filename to filename.
+    function getFileName(file) {
+      var len = file.length;
+      var index = file.indexOf('_') + 1;
+      return file.substring(index, len);
+    }
   </script>
 </head>
 <body>
   <!-- The file upload form used as target for the file upload widget -->
-  <form id="fileupload" action="FileUploadHandler.ashx" method="POST" enctype="multipart/form-data">
+  <form id="fileupload" action="FileUploadHandler.ashx?objectContext=Uploads" method="POST" enctype="multipart/form-data">
     <div class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 5px;">
       <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
       <div class="fileupload-buttonbar">
@@ -188,7 +195,6 @@
     </div>
 
     <%--object context & upload context--%>
-    <input id="objectContext" type="hidden" name="objectContext" value="Uploads" />
     <input id="uploadContext" type="hidden" name="uploadContext" value="" />
   </form>
 
@@ -240,7 +246,7 @@
             <tr class="template-download fade">
                 <td>
                     <p class="name">
-                        <span>{%=file.name%}</span>
+                        <span>{%=getFileName(file.name)%}</span>
                     </p>
                     {% if (file.error) { %}
                     <div><span class="label label-danger">Error</span> {%=file.error%}</div>

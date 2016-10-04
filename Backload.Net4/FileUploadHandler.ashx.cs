@@ -1,4 +1,5 @@
-﻿using Backload.Contracts.Context;
+﻿using Backload.Context.DataProvider;
+using Backload.Contracts.Context;
 using Backload.Contracts.FileHandler;
 using Backload.Helper;
 using System;
@@ -17,12 +18,21 @@ namespace Backload.Net4
       try
       {
         // Wrap the request into a HttpRequestBase type
-        HttpRequestBase request = new HttpRequestWrapper(context.Request);
+        //HttpRequestBase request = new HttpRequestWrapper(context.Request);
+        BackloadDataProvider provider = new BackloadDataProvider(context.Request);
+
+        // file rename
+        if (context.Request.HttpMethod.Equals("POST"))
+        {
+          var name = provider.Files[0].FileName;
+          provider.Files[0].FileName = string.Format("{0}_{1}", Guid.NewGuid(), name);
+        }
+
         // Create and initialize the handler
         IFileHandler handler = Backload.FileHandler.Create();
 
         // Init Backload execution environment and execute the request
-        handler.Init(request);
+        handler.Init(provider);
 
         // Call the execution pipeline and get the result
         IBackloadResult result = handler.Execute().Result;
