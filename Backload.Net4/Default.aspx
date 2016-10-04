@@ -251,7 +251,10 @@
             <tr class="template-download fade">
                 <td>
                     <p class="name">
-                        <span>{%=getFileName(file.name)%}</span>
+                        <span>
+                              {%=file.extra.message%}
+                              {%=getFileName(file.name)%}
+                        </span>
                     </p>
                     {% if (file.error) { %}
                     <div><span class="label label-danger">Error</span> {%=file.error%}</div>

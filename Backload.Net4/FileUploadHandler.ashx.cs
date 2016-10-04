@@ -31,6 +31,8 @@ namespace Backload.Net4
         // Create and initialize the handler
         IFileHandler handler = Backload.FileHandler.Create();
 
+        handler.Events.StoreFileRequestFinished += Event_IncomingRequestStarted;
+
         // Init Backload execution environment and execute the request
         handler.Init(provider);
 
@@ -54,6 +56,16 @@ namespace Backload.Net4
       {
         return false;
       }
+    }
+
+    /// <summary>
+    /// custom event
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    public void Event_IncomingRequestStarted(IFileHandler sender, Backload.Contracts.Eventing.IStoreFileRequestEventArgs e)
+    {
+      e.Param.FileStatusItem.Message = "(test) ";
     }
   }
 }
