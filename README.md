@@ -1,6 +1,6 @@
 # Backload for .Net Framework 4 + Webform
 
-# Features
+### Features
 * base on .Net Framework 4 (without async/await)
 * use only blueimp file upload ui
 * remove bundles
@@ -11,14 +11,14 @@
 * allow same file name (rename guid)
 * add custom store event for test
 
-# Usage
+### Usage
 * open Backload.Net4.sln file
 * use iis express (change if you want)
 * build and run and enjoy
 
 # Backload for ASP.NET Core
 
-# Features
+### Features
 * base on ASP.NET Core
 * rename file when uploaded (Guid_filename)
 * append test string when uploaded (index.cshtml)
@@ -28,7 +28,7 @@
 * check totally same file
 * hidden for cancel, delete button
 
-# Usage
+### Usage
 * install visual studio code
 * go to Backload.NetCore directory
 * select 'open with code' in context menu
