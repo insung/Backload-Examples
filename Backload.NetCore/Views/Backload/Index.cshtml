@@ -1,0 +1,385 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backload Uploader</title>
+
+    <!-- Bootstrap & jQuery -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.12.3.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <!-- backload for blueimp javascript -->
+    <script src="~/Backload/Client/blueimp/blob/js/canvas-to-blob.min.js"></script>
+    <script src="~/Backload/Client/blueimp/gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="~/Backload/Client/blueimp/loadimage/js/load-image.all.min.js"></script>
+    <script src="~/Backload/Client/blueimp/templates/js/tmpl.min.js"></script>
+
+    <!-- backload for blueimp plugin javascript -->
+    <script src="~/Backload/Client/blueimp/fileupload/js/vendor/jquery.ui.widget.js"></script>
+    <script src="~/Backload/Client/blueimp/fileupload/js/jquery.iframe-transport.js"></script>
+    <script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload.js"></script>
+    <script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-process.js"></script>
+    <script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-image.js"></script>
+    <script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-audio.js"></script>
+    <script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-video.js"></script>
+    <script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-validate.js"></script>
+    <script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-ui.js" charset="utf-8"></script>
+    <script src="~/Backload/Client/blueimp/fileupload/js/themes/jquery.fileupload-themes.js"></script>
+
+    <!-- backload for blueimp styles -->
+    <link href="~/Backload/Client/blueimp/gallery/css/blueimp-gallery.min.css" rel="stylesheet" />
+    <link href="~/Backload/Client/blueimp/fileupload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/Backload/Client/blueimp/fileupload/css/jquery.fileupload-ui.css" rel="stylesheet" />
+    
+    <style type="text/css">
+        body {
+            padding: 12px;
+            font-size: 12px;
+            overflow: hidden;
+        }
+
+        .navbar {
+            min-height: 30px;
+            padding-top: 8px;
+            padding-left: 11px;
+            margin-bottom: 10px;
+            border: 0px;
+        }
+
+        .btn {
+            font-size: 12px;
+        }
+
+        .progress {
+            margin-bottom: 5px;
+        }
+
+        #dropzone {
+            text-align: center;
+            line-height: 16em;
+        }
+
+        #progressbar {
+            margin-right: 15px;
+            margin-left: 15px;
+        }
+
+        .table-header {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .table-header th {
+            text-indent: 1em;
+        }
+    </style>
+    
+    <!--backload handler javascript-->
+    <script src="~/Scripts/backloaduploader.js"></script>
+
+    <script type="text/javascript">
+        var bufferFiles = [{ name: null, type: null, size: 0 }];
+        var groupList;
+
+        $(document).ready(function () {
+            remarginElements();
+
+            var temp = '@ViewBag.TempDir';
+            $("#uploadContext").val(temp);
+            
+            var maxSize = parseInt('@ViewBag.MaxSize');
+            var maxCount = parseInt('@ViewBag.MaxCount');
+
+            $("#maxFileSize").val(maxSize);
+            $("#maxFileCount").val(maxCount);
+
+            $("#view-max-size").html(maxSize / (1024 * 1024));
+            $("#view-max-count").html(maxCount);
+
+            // async post ajax request
+            getGroupList();
+        });
+
+        $(window).resize(function () {
+            remarginElements();
+        });
+
+        function remarginElements() {
+            // 파일업로드 버튼 <div> height 에 따라 하위의 element 의 margin-top 이 변경되도록 함
+            $("#dropzone").css("margin-top", ($("#buttonbar").height()) + 'px');
+            $("#filetable").css("margin-top", ($("#buttonbar").height()) + 'px');
+        }
+
+        // bufferFiles 에 전달받은 file 이 있는지 확인하는 메소드
+        function checkUploadedFile(file) {
+            var result = false;
+
+            if (file.name.length > 104) {
+                return true;
+            }
+
+            $.each(bufferFiles, function (idx, f) {
+                if (f.name === file.name && f.type == file.type && f.size === file.size) {
+                    result = true;
+                    // break;
+                    return false;
+                }
+            });
+
+            if (!result) {
+                var item = { name: file.name, type: file.type, size: file.size };
+                bufferFiles.push(item);
+
+                $.ajax({
+                    type: "POST",
+                    url: "SetAttachedFileCount?value=" + (bufferFiles.length - 1).toString(),
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "JSON",
+                    success: function () {
+
+                    }
+                });
+            }
+
+            return result;
+        }
+
+        // bufferFiles 에서 전달받은 data 을 삭제하는 메소드
+        function removeUploadedFile(data) {
+            // data 은 name|type|size 로 구성되어있어서 slice 가 필요
+            var arr = data.split('|');
+            var item = { name: arr[0], type: arr[1], size: parseInt(arr[2]) };
+            var index = 0;
+        
+            // 삭제할 index 를 가져옴
+            $.each(bufferFiles, function (idx, f) {
+                if (f.name === item.name && f.type === item.type && f.size === item.size)
+                index = idx;
+            });
+
+            // 삭제
+            bufferFiles.splice(index, 1);
+
+            $.ajax({
+                type: "POST",
+                url: "SetAttachedFileCount?value=" + (bufferFiles.length - 1).toString(),
+                contentType: "application/json;charset=UTF-8",
+                dataType: "JSON",
+                success: function () {
+
+                }
+            });
+        }
+
+        // 파일명이 {GUID}_파일명으로 이루어져 있어 {GUID}_ 를 삭제하는 메소드
+        function getFileName(file) {
+            var len = file.length;
+            var index = file.indexOf('_') + 1;
+            return file.substring(index, len);
+        }
+
+        // 문서그룹 List 를 가져오는 메소드
+        function getGroupList() {
+            $.ajax({
+                type: "POST",
+                url: "GetDocGroupList"
+            }).done(function (result) {
+                groupList = result;
+            });
+        }
+
+        function getDocGroupName(groupId) {
+            var result;
+            $.each(groupList, function (key, value) {
+                if (value.key == parseInt(groupId))
+                    result = value.value;
+            })
+
+            return result;
+        }
+    </script>
+</head>
+<body>
+
+    <!-- The file upload form used as target for the file upload widget -->
+    <form id="fileupload" action="/Upload/FileHandler?objectContext=backload" method="POST" enctype="multipart/form-data">        
+        <div class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 5px;">
+            <div id="buttonbar" class="fileupload-buttonbar">
+                <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="btn btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>파일추가</span>
+                    <input type="file" name="files[]" multiple />
+                </span>
+                <button type="submit" class="btn btn-danger start">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>업로드 시작</span>
+                </button>
+                <button type="reset" class="btn btn-warning cancel hidden">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>업로드 취소</span>
+                </button>
+                <button type="button" class="btn btn-danger delete hidden">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>파일 삭제</span>
+                </button>
+                <input type="checkbox" class="toggle hidden" />
+                <!-- The global file processing state -->
+                <!--<span class="fileupload-process"></span>-->
+                <span id="filecountgroup" style="float: right; margin-right: 10px; margin-top: 8px;">
+                    총 파일 개수:
+                    <span id="file-count">0</span>
+                    개
+                    &nbsp;
+                    총 파일 크기:
+                    <span id="file-size">0 KB</span>
+                    &nbsp;&nbsp;&nbsp;
+                    (최대 허용 개수:
+                    <span id="view-max-count"></span>
+                    개 /
+                    &nbsp;
+                    최대 허용 크기:
+                    <span id="view-max-size"></span>
+                    MB)
+                </span>
+
+                <div id="progressbar" class="row" style="clear: right;">
+                    <!-- The global progress state -->
+                    <div class="fileupload-progress">          
+                        <!-- The global progress bar -->
+                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar progress-bar-success" style="width:0.01%;"></div>
+                        </div>
+                        <!-- The extended global progress state -->
+                        <div class="progress-extended">&nbsp;</div>
+                    </div>
+                </div>
+
+                <table class="table-header">
+                    <thead>
+                        <tr>
+                            <th>파일명</th>
+                            <th style="width: 210px;">크기</th>
+                            <th style="width: 82px;">상태</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+        <div id="dropzone" class="alert alert-info">
+            파일을 여기에 끌어다 놓으세요
+        </div>
+
+        <div class="container-fluid">
+            <!-- The table listing the files available for upload/download -->
+            <div id="filetable" class="row">
+                <table role="presentation" class="table table-striped table-hover">
+                    <tbody class="files"></tbody>
+                </table>
+            </div>
+        </div>
+        
+        <input id="uploadContext" type="hidden" name="uploadContext" value="" />
+
+        <input id="maxFileCount" runat="server" type="hidden" />
+        <input id="maxFileSize" runat="server" type="hidden" />
+    </form>
+
+    <!-- The template to display files available for upload -->
+    <script id="template-upload" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+        {% if (checkUploadedFile(file)) continue; %}
+        <tr class="template-upload">
+            <td>
+                <p class="name" style="width: 100%">{%=file.name%}</p>
+                <strong class="error text-danger"></strong>
+            </td>
+            <td style="width: 90px;">
+                <p class="size">Processing...</p>
+            </td>
+            <td style="width: 120px;">
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+            </td>
+            <td style="width: 80px;">
+                {% if (!i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start hidden" disabled>
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>시작</span>
+                </button>
+                {% } %}
+                {% if (!i) { %}
+                <button class="btn btn-warning cancel" value="{%= file.name + '|' + file.type + '|' + file.size %}" onclick="removeUploadedFile($(this).val());">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>취소</span>
+                </button>
+                {% } %}
+            </td>
+        </tr>
+        {% } %}
+    </script>
+
+    <!-- The template to display files available for download -->
+    <script id="template-download" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+        <tr class="template-download fade">
+            <td>
+                <p class="name" style="width: 100%">
+                    <span>
+                        {% if (file.extra.message.length > 0) { %}
+                        ({%=getDocGroupName(file.extra.message)%})&nbsp;
+                        {% } %}
+                        {%=getFileName(file.name)%}
+                    </span>
+                </p>
+                {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                {% } %}
+            </td>
+            <td style="width: 90px;">
+                <span class="size">{%=o.formatFileSize(file.size)%}</span>
+            </td>
+            <td style="width: 120px;"></td>
+            <td style="width: 80px;">
+                {% if (file.error) { %}
+                <p class="name">업로드 실패</p>
+                {% } else if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete hidden" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}" {% if (file.deletewithcredentials) { %} data-xhr-fields='{"withCredentials":true}' {% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>삭제</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle hidden">
+                <p class="name">업로드 완료</p>
+                {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>취소</span>
+                </button>
+                {% } %}
+            </td>
+        </tr>
+        {% } %}
+    </script>
+
+    <!-- The blueimp Gallery widget -->
+    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+    </div>
+</body>
+</html>
