@@ -69,26 +69,14 @@ namespace BackloadService
         // Get Document Group
         private void Events_StoreFileFinished(IFileHandler sender, Backload.Contracts.Eventing.IStoreFileRequestEventArgs e)
         {
-            e.Param.FileStatusItem.Message = "";
-
             try
             {
                 // get exportdata from appsettings.json
                 string exportDataPath = _config.Value.ExportDataPath;
 
-                string filePath = Path.Combine(
-                    exportDataPath,
-                    e.Param.FileStatusItem.ObjectContext,
-                    e.Param.FileStatusItem.UploadContext,
-                    e.Param.FileStatusItem.FileName);
-
-                FileInfo fi = new FileInfo(filePath);
-                if (fi.Exists)
-                {
-                    Random rand = new Random();
-                    int groupId = rand.Next(1, 3);
-                    e.Param.FileStatusItem.Message = groupId.ToString();
-                }
+                Random rand = new Random();
+                int groupId = rand.Next(1, 3);
+                e.Param.FileStatusItem.Message = groupId.ToString();
             }
             catch (Exception ex)
             {

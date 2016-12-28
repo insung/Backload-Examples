@@ -33,7 +33,7 @@
     <script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-audio.js"></script>
     <script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-video.js"></script>
     <script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-validate.js"></script>
-    <script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-ui.js" charset="utf-8"></script>
+    <script src="~/Backload/Client/blueimp/fileupload/js/jquery.fileupload-ui.js"></script>
     <script src="~/Backload/Client/blueimp/fileupload/js/themes/jquery.fileupload-themes.js"></script>
 
     <!-- backload for blueimp styles -->
@@ -142,7 +142,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "SetAttachedFileCount?value=" + (bufferFiles.length - 1).toString(),
+                    url: "backload/SetAttachedFileCount?value=" + (bufferFiles.length - 1).toString(),
                     contentType: "application/json;charset=UTF-8",
                     dataType: "JSON",
                     success: function () {
@@ -172,7 +172,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "SetAttachedFileCount?value=" + (bufferFiles.length - 1).toString(),
+                url: "backload/SetAttachedFileCount?value=" + (bufferFiles.length - 1).toString(),
                 contentType: "application/json;charset=UTF-8",
                 dataType: "JSON",
                 success: function () {
@@ -192,7 +192,7 @@
         function getGroupList() {
             $.ajax({
                 type: "POST",
-                url: "GetDocGroupList"
+                url: "backload/GetDocGroupList"
             }).done(function (result) {
                 groupList = result;
             });
@@ -218,37 +218,35 @@
                 <!-- The fileinput-button span is used to style the file input field as button -->
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-plus"></i>
-                    <span>파일추가</span>
+                    <span>Add</span>
                     <input type="file" name="files[]" multiple />
                 </span>
                 <button type="submit" class="btn btn-danger start">
                     <i class="glyphicon glyphicon-upload"></i>
-                    <span>업로드 시작</span>
+                    <span>Upload</span>
                 </button>
                 <button type="reset" class="btn btn-warning cancel hidden">
                     <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>업로드 취소</span>
+                    <span>Cancel</span>
                 </button>
                 <button type="button" class="btn btn-danger delete hidden">
                     <i class="glyphicon glyphicon-trash"></i>
-                    <span>파일 삭제</span>
+                    <span>Delete</span>
                 </button>
                 <input type="checkbox" class="toggle hidden" />
                 <!-- The global file processing state -->
                 <!--<span class="fileupload-process"></span>-->
                 <span id="filecountgroup" style="float: right; margin-right: 10px; margin-top: 8px;">
-                    총 파일 개수:
+                    File Count:
                     <span id="file-count">0</span>
-                    개
                     &nbsp;
-                    총 파일 크기:
+                    File Size:
                     <span id="file-size">0 KB</span>
                     &nbsp;&nbsp;&nbsp;
-                    (최대 허용 개수:
+                    (Max File Count:
                     <span id="view-max-count"></span>
-                    개 /
-                    &nbsp;
-                    최대 허용 크기:
+                    &nbsp;/&nbsp;
+                    Max File Size:
                     <span id="view-max-size"></span>
                     MB)
                 </span>
@@ -268,9 +266,9 @@
                 <table class="table-header">
                     <thead>
                         <tr>
-                            <th>파일명</th>
-                            <th style="width: 210px;">크기</th>
-                            <th style="width: 82px;">상태</th>
+                            <th>FileName</th>
+                            <th style="width: 210px;">Size</th>
+                            <th style="width: 82px;">Status</th>
                         </tr>
                     </thead>
                 </table>
@@ -278,7 +276,7 @@
         </div>
 
         <div id="dropzone" class="alert alert-info">
-            파일을 여기에 끌어다 놓으세요
+            Drag n Drop here
         </div>
 
         <div class="container-fluid">
@@ -315,13 +313,13 @@
                 {% if (!i && !o.options.autoUpload) { %}
                 <button class="btn btn-primary start hidden" disabled>
                     <i class="glyphicon glyphicon-upload"></i>
-                    <span>시작</span>
+                    <span>Start</span>
                 </button>
                 {% } %}
                 {% if (!i) { %}
                 <button class="btn btn-warning cancel" value="{%= file.name + '|' + file.type + '|' + file.size %}" onclick="removeUploadedFile($(this).val());">
                     <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>취소</span>
+                    <span>Cancel</span>
                 </button>
                 {% } %}
             </td>
@@ -352,18 +350,18 @@
             <td style="width: 120px;"></td>
             <td style="width: 80px;">
                 {% if (file.error) { %}
-                <p class="name">업로드 실패</p>
+                <p class="name">Failed</p>
                 {% } else if (file.deleteUrl) { %}
                 <button class="btn btn-danger delete hidden" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}" {% if (file.deletewithcredentials) { %} data-xhr-fields='{"withCredentials":true}' {% } %}>
                     <i class="glyphicon glyphicon-trash"></i>
-                    <span>삭제</span>
+                    <span>Delete</span>
                 </button>
                 <input type="checkbox" name="delete" value="1" class="toggle hidden">
-                <p class="name">업로드 완료</p>
+                <p class="name">Complete</p>
                 {% } else { %}
                 <button class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>취소</span>
+                    <span>Cancel</span>
                 </button>
                 {% } %}
             </td>
